@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+./gradlew :ejson:clean :ejson:build :ejson:publish --no-daemon --no-parallel && \
+./gradlew :gradle-plugin:clean :gradle-plugin:build :gradle-plugin:publish --no-daemon --no-parallel && \
+
+if ! grep -q -- "VERSION_NAME=.*-SNAPSHOT" gradle.properties;
+then
+./gradlew closeAndReleaseRepository
+else
+echo "Nothing else to do for a snapshot"
+fi

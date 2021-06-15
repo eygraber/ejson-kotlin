@@ -652,9 +652,9 @@ style:
   RedundantHigherOrderMapUsage:
     active: false
   RedundantVisibilityModifierRule:
-    active: true
+    active: false
   ReturnCount:
-    active: true
+    active: false
     max: 2
     excludedFunctions: 'equals'
     excludeLabeled: false
@@ -731,3 +731,8 @@ style:
     active: true
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     excludeImports: []
+
+style-eygraber:
+  NewlineForMultilineKeyword:
+    active: true
+    autoCorrect: true

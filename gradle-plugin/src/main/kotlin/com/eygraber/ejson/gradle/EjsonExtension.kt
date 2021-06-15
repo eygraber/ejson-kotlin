@@ -1,6 +1,6 @@
 package com.eygraber.ejson.gradle
 
-open class EjsonExtension {
-  var onSecretsDecrypted: () -> Unit = {}
-  var onEjsonFailure: ((variant: String) -> Boolean) = { true }
+public open class EjsonExtension {
+  public var onSecretsDecrypted: () -> Unit = {}
+  public var onEjsonFailure: ((variant: String) -> Boolean) = { true }
 }

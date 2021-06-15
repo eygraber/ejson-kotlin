@@ -7,14 +7,14 @@ import org.gradle.api.logging.LogLevel
 import java.io.ByteArrayOutputStream
 import java.io.File
 
-class Ejson(
+public class Ejson(
   private val project: Project,
   private val extension: EjsonExtension
 ) {
   @Suppress("UNCHECKED_CAST")
   private fun String.toMap() = JsonSlurper().parseText(this) as MutableMap<String, Any>
 
-  fun decrypt(secrets: File): MutableMap<String, Any> {
+  public fun decrypt(secrets: File): MutableMap<String, Any> {
     if(!secrets.exists()) {
       project.logger.log(
         LogLevel.INFO,
@@ -38,9 +38,10 @@ class Ejson(
     }
 
     return if(execResult.exitValue != 0) {
-      val err = if (stdout.size() == 0) stderr else stdout
+      val err = if(stdout.size() == 0) stderr else stdout
       throw GradleException("ejson exited with a non-zero value (${execResult.exitValue}) - $err")
-    } else {
+    }
+    else {
       stdout
         .toString()
         .toMap()

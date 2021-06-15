@@ -11,7 +11,7 @@ private data class EjsonError(
   val throwable: Throwable
 )
 
-class EjsonPlugin : Plugin<Project> {
+public class EjsonPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     val ejsonExtension = project.extensions.create("ejson", EjsonExtension::class.java)
 
@@ -61,7 +61,8 @@ class EjsonPlugin : Plugin<Project> {
               "Ejson: $name Secrets - $it"
             )
           }
-        } catch(e: Throwable) {
+        }
+        catch(e: Throwable) {
           if (error == null) error = EjsonError(name, e)
         }
       }

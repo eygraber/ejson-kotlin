@@ -10,5 +10,6 @@ repositories {
 }
 
 dependencies {
-    implementation("software.pando.crypto:salty-coffee:1.0.3")
+    implementation("org.purejava:tweetnacl-java:1.1.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 }

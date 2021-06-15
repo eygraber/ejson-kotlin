@@ -1,14 +1,25 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    kotlin
-    detekt
-    publish
+  kotlin("jvm") version ("1.5.10")
+  detekt
+  publish
 }
 
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    implementation("software.pando.crypto:salty-coffee:1.0.3")
+  implementation("org.purejava:tweetnacl-java:1.1.2")
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+}
+
+kotlin {
+  explicitApi()
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+  kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
 }

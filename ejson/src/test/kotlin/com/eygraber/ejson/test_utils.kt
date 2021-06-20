@@ -85,17 +85,17 @@ internal fun Ejson.assertEncryptSucceeded(input: String): Ejson.Result.Success =
     encrypt(input).assertSucceeded()
   }
 
-internal fun Ejson.assertDecryptSucceeded(input: String): Ejson.Result.Success =
+internal fun Ejson.assertDecryptSucceeded(input: String, userSuppliedPrivateKey: String? = null): Ejson.Result.Success =
   Assertions.assertDoesNotThrow<Ejson.Result.Success> {
-    decrypt(input).assertSucceeded()
+    decrypt(input, userSuppliedPrivateKey).assertSucceeded()
   }
 
 internal fun Ejson.assertEncryptSucceededJson(input: String): JsonObject =
   assertEncryptSucceeded(input).toJson()
 
-internal fun Ejson.assertDecryptSucceededJson(input: String): JsonObject =
+internal fun Ejson.assertDecryptSucceededJson(input: String, userSuppliedPrivateKey: String? = null): JsonObject =
   Assertions.assertDoesNotThrow<JsonObject> {
-    assertDecryptSucceeded(input).toJson()
+    assertDecryptSucceeded(input, userSuppliedPrivateKey).toJson()
   }
 
 internal fun Ejson.Result.assertSucceeded(): Ejson.Result.Success {

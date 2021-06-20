@@ -51,6 +51,23 @@ class DecryptionTests {
     }
   }
 
+  @Test
+  fun `decrypting with an user supplied private key actually works`() = usingFileSystem { fs ->
+    val kp = EjsonKeyPair.generate()
+    val ejson = Ejson(filesystem = fs)
+
+    val input = kp.createValidSecretsJson(UNBOXED_PAIR)
+    val encrypted = ejson.assertEncryptSucceeded(
+      input
+    ).json
+
+    val privateKey = kp.secretKey.toHexString()
+
+    assertThat(
+      ejson.assertDecryptSucceeded(encrypted, userSuppliedPrivateKey = privateKey).json
+    ).isEqualTo(input)
+  }
+
   private companion object {
     const val BOXED_SECRET_KEY = "secret"
     const val BOXED_SECRET =

@@ -41,7 +41,7 @@ public class Ejson(
     return encrypt(secretsJsonString)
   }
 
-  public fun decrypt(secretsJsonString: String): Result {
+  public fun decrypt(secretsJsonString: String, userSuppliedPrivateKey: String? = null): Result {
     val jsonPublicKey = when(val jsonPublicKey = secretsJsonString.extractPublicKey()) {
       is PublicKeyResult.Error -> error("Decryption failed: ${jsonPublicKey.error}")
 
@@ -50,13 +50,15 @@ public class Ejson(
 
     val jsonPublicKeyEncoded = jsonPublicKey.key.encodeHex()
 
-    val keyDir = keyDirProvider.keyDir ?: error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded")
+    val privateKeyString = userSuppliedPrivateKey ?: run {
+      val keyDir = keyDirProvider.keyDir ?: error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded")
 
-    val privateKeyString = try {
-      keyDir.resolve(jsonPublicKeyEncoded).readText().trim()
-    }
-    catch(t: Throwable) {
-      error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded (${t.message})")
+      try {
+        keyDir.resolve(jsonPublicKeyEncoded).readText().trim()
+      }
+      catch(t: Throwable) {
+        error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded (${t.message})")
+      }
     }
 
     val privateKey = privateKeyString.toPrivateKey().getOrThrow()
@@ -69,7 +71,7 @@ public class Ejson(
     }
   }
 
-  public fun decrypt(ejsonSecretsFile: Path): Result {
+  public fun decrypt(ejsonSecretsFile: Path, userSuppliedPrivateKey: String? = null): Result {
     val secretsJsonString = try {
       ejsonSecretsFile.readText()
     }
@@ -77,7 +79,7 @@ public class Ejson(
       error("Decryption failed: An error occurred while reading ${ejsonSecretsFile.pathString} - ${t.message}")
     }
 
-    return decrypt(secretsJsonString)
+    return decrypt(secretsJsonString, userSuppliedPrivateKey)
   }
 
   public sealed class Result {

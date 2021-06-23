@@ -1,11 +1,9 @@
 package com.eygraber.ejson.gradle
 
 import com.eygraber.ejson.Ejson
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
-import kotlinx.serialization.json.jsonObject
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
@@ -46,20 +44,11 @@ public abstract class EjsonDecryptTask : DefaultTask() {
       } ?: json.toString()
     }
 
-    val outputText = when(
-      val result = Ejson().decrypt(
-        ejsonSecretsFile = secretsFile.get().asFile.toPath(),
-        userSuppliedPrivateKey = userSuppliedPrivateKey.orNull
-      )
-    ) {
-      is Ejson.Result.Success -> transformOutput(
-        Json
-          .parseToJsonElement(result.json)
-          .jsonObject
-      )
-
-      is Ejson.Result.Error -> error(result.error)
-    }
+    val outputText = Ejson().decryptSecrets(
+      secretsFile = secretsFile.get().asFile.toPath(),
+      userSuppliedPrivateKey = userSuppliedPrivateKey.orNull,
+      transform = transformOutput
+    )
 
     output.get().asFile.writeText(outputText)
   }

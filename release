@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
-./gradlew :ejson:clean :ejson:build :ejson:publish $@ --no-daemon --no-parallel
+./gradlew :ejson:clean :ejson:build :ejson:publish $@ --no-daemon --no-parallel && \
+./gradlew :ejson-gradle:clean :ejson-gradle:build :ejson-gradle:publish $@ --no-daemon --no-parallel

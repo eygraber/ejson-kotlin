@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
   compileOnly(gradleApi())
-  implementation(project(":ejson"))
+  api(project(":ejson"))
   compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 }
 

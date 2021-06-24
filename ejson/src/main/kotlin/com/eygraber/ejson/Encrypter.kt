@@ -1,7 +1,6 @@
 package com.eygraber.ejson
 
 import com.iwebpp.crypto.TweetNaclFast
-import java.util.Base64
 import kotlin.random.Random
 
 internal class Encrypter internal constructor(
@@ -26,7 +25,7 @@ internal class Encrypter internal constructor(
       return field
     }
 
-  private val encoder = Base64.getEncoder()
+  private val encoder = Base64()
 
   fun encrypt(message: String): String {
     if(message.matches(boxRegex)) return message

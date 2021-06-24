@@ -1,14 +1,22 @@
 package com.eygraber.ejson
 
-import java.nio.file.FileSystem
 import java.nio.file.FileSystems
 import java.nio.file.Path
 import kotlin.io.path.pathString
 import kotlin.io.path.readText
 
+private fun defaultfs() =
+  try {
+    Class.forName("java.nio.file.FileSystems")
+    FileSystems.getDefault()
+  }
+  catch(_: Throwable) {
+    Any()
+  }
+
 public class Ejson(
   overrideKeyDir: Path? = null,
-  filesystem: FileSystem = FileSystems.getDefault()
+  filesystem: Any = defaultfs()
 ) {
   private val keyDirProvider = KeyDirProvider(
     filesystem,

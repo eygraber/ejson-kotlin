@@ -1,12 +1,11 @@
 package com.eygraber.ejson
 
 import com.iwebpp.crypto.TweetNaclFast
-import java.util.Base64
 
 internal class Decrypter internal constructor(
   private val privateKey: PrivateKey
 ) {
-  private val decoder = Base64.getDecoder()
+  private val decoder = Base64()
 
   fun decrypt(message: String): String {
     val error = "invalid message format"

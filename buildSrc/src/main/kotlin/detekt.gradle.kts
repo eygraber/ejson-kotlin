@@ -5,7 +5,7 @@ plugins {
 }
 
 detekt {
-  toolVersion = "1.17.1"
+  toolVersion = "1.18.1"
 
   autoCorrect = true
   parallel = true
@@ -21,7 +21,7 @@ tasks.withType<Detekt>().configureEach {
 }
 
 dependencies {
-  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.17.1")
+  detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.1")
   detektPlugins("com.eygraber.detekt.rules:formatting:1.0.10")
   detektPlugins("com.eygraber.detekt.rules:style:1.0.10")
 }

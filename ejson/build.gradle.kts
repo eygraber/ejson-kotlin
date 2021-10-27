@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version ("1.5.10")
+  kotlin("jvm")
   detekt
   publish
 }
@@ -18,7 +18,7 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
   testImplementation("org.junit-pioneer:junit-pioneer:1.4.2")
   testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
-  testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+  testImplementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
   testImplementation("com.google.jimfs:jimfs:1.2")
 }
 

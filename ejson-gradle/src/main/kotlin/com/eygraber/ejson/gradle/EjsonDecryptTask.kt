@@ -5,18 +5,16 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 import org.gradle.api.DefaultTask
-import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
-import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
-import java.io.File
 
 @CacheableTask
 public abstract class EjsonDecryptTask : DefaultTask() {
@@ -32,12 +30,8 @@ public abstract class EjsonDecryptTask : DefaultTask() {
   @get:Input
   public abstract val outputKey: Property<String>
 
-  @get:Optional
-  @get:Input
-  public abstract val outputFileName: Property<String>
-
-  @get:OutputDirectory
-  public abstract val output: DirectoryProperty
+  @get:OutputFile
+  public abstract val output: RegularFileProperty
 
   @TaskAction
   public fun decrypt() {
@@ -56,6 +50,6 @@ public abstract class EjsonDecryptTask : DefaultTask() {
       transform = transformOutput
     )
 
-    File(output.get().asFile, outputFileName.getOrElse("ejson")).writeText(outputText)
+    output.get().asFile.writeText(outputText)
   }
 }

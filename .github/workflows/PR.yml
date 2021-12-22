@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew test
 
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v2.8.2
+        uses: mikepenz/action-junit-report@v2.8.3
         if: always()
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'

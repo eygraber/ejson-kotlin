@@ -34,13 +34,13 @@ public value class PublicKey(public val key: ByteArray) {
 
 internal fun String.toPrivateKey(): Result<PrivateKey> = trim().runCatching {
   require(length == 64) {
-    "private key has invalid format"
+    "private key has invalid format (length=$length)"
   }
 
   val bytes = decodeHex()
 
   require(bytes.size == 32) {
-    "private key invalid"
+    "private key invalid (size=${bytes.size})"
   }
 
   PrivateKey(bytes)
@@ -48,13 +48,13 @@ internal fun String.toPrivateKey(): Result<PrivateKey> = trim().runCatching {
 
 internal fun String.toPublicKey(): Result<PublicKey> = trim().runCatching {
   require(length == 64) {
-    "public key has invalid format"
+    "public key has invalid format (length=$length)"
   }
 
   val bytes = decodeHex()
 
   require(bytes.size == 32) {
-    "public key invalid"
+    "public key invalid (size=${bytes.size})"
   }
 
   PublicKey(bytes)

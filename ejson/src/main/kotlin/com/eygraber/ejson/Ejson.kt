@@ -59,7 +59,8 @@ public class Ejson(
     val jsonPublicKeyEncoded = jsonPublicKey.key.encodeHex()
 
     val privateKeyString = userSuppliedPrivateKey ?: run {
-      val keyDir = keyDirProvider.keyDir ?: error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded")
+      val keyDir = keyDirProvider.keyDir
+        ?: error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded")
 
       try {
         keyDir.resolve(jsonPublicKeyEncoded).readText().trim()
@@ -69,10 +70,10 @@ public class Ejson(
       }
     }
 
-    val privateKey = privateKeyString.toPrivateKey().getOrThrow()
-
-    val decrypter = Decrypter(privateKey)
     return runCatching {
+      val privateKey = privateKeyString.toPrivateKey().getOrThrow()
+      val decrypter = Decrypter(privateKey)
+
       Result.Success(secretsJsonString.walkJsonAndTransformStrings(decrypter::decrypt))
     }.getOrElse {
       Result.Error("Decryption failed: ${it.message ?: "no message"}")

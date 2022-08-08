@@ -107,13 +107,13 @@ class InputTests {
                 """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: public key has invalid format"
+      "Encryption failed: public key has invalid format (length=7)"
     ) {
       ejson.encrypt(input)
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: public key has invalid format"
+      "Decryption failed: public key has invalid format (length=7)"
     ) {
       ejson.decrypt(input)
     }

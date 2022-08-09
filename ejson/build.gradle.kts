@@ -4,7 +4,6 @@ plugins {
   publish
 }
 
-
 repositories {
   mavenCentral()
 }

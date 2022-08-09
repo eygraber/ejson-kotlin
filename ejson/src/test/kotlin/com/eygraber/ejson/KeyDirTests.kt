@@ -19,7 +19,7 @@ class KeyDirTests {
       ejson.decrypt(
         """
       |{"_public_key": "$PUBLIC_KEY"}
-      """.trimMargin()
+        """.trimMargin()
       )
     }
   }
@@ -37,7 +37,7 @@ class KeyDirTests {
       ejson.decrypt(
         """
       |{"_public_key": "$PUBLIC_KEY"}
-      """.trimMargin()
+        """.trimMargin()
       )
     }
   }

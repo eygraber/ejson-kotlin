@@ -81,7 +81,7 @@ class InputTests {
                 |{
                 |  "public_key": "test"
                 |}
-                """.trimMargin()
+    """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(
       "Encryption failed: public key string not present in EJSON file"
@@ -104,7 +104,7 @@ class InputTests {
                 |{
                 |  "_public_key": "invalid"
                 |}
-                """.trimMargin()
+    """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(
       "Encryption failed: public key has invalid format (length=7)"

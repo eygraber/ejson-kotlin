@@ -69,11 +69,6 @@ class DecryptionTests {
   }
 
   private companion object {
-    const val BOXED_SECRET_KEY = "secret"
-    const val BOXED_SECRET =
-      "EJ[1:fjVmA40ot9E0WTIejpeBvMwD3x8oyIo33NOGq0VSslo=:7Acfyhjym4oeZIstXa2EvE1HbSPWP1f9:1SDE4XkfNLRwcZzPLkX9/2YNwJfw3tP1Di1sVDQMYZx9oLm7Ds5v40dJh5Ji]"
-    val BOXED_PAIR = BOXED_SECRET_KEY to BOXED_SECRET
-
     const val UNBOXED_SECRET_KEY = "not secret"
     const val UNBOXED_SECRET = "4, 8, 15, 16, 23, 42"
     val UNBOXED_PAIR = UNBOXED_SECRET_KEY to UNBOXED_SECRET

@@ -1,0 +1,44 @@
+[versions]
+detekt = "1.21.0"
+detektEygraber = "1.0.11"
+
+dokka = "1.7.10"
+
+gradleUtils = "0.0.13"
+
+jdk = "17"
+
+junit = "5.9.0"
+
+kotlin = "1.7.10"
+
+publish = "0.21.0"
+
+[plugins]
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
+
+[libraries]
+buildscript-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
+buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
+buildscript-utils-detekt = { module = "com.eygraber:gradle-utils-detekt", version.ref = "gradleUtils" }
+buildscript-utils-kotlin = { module = "com.eygraber:gradle-utils-kotlin", version.ref = "gradleUtils" }
+
+detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
+detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
+
+kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3"
+
+tweetnacl = "org.purejava:tweetnacl-java:1.1.2"
+
+test-assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
+test-jimfs = "com.google.jimfs:jimfs:1.2"
+test-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+test-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+test-junit-extensions = "uk.org.webcompere:system-stubs-jupiter:2.0.1"
+test-junit-pioneer = "org.junit-pioneer:junit-pioneer:1.7.1"

@@ -103,32 +103,7 @@ internal fun String.extractPublicKeyFromJson(): String? {
 
   while(true) {
     when(val token = tokenizer.nextToken()) {
-      JsonToken.BeginObject -> {
-        key = null
-        expectingValue = false
-      }
-
-      JsonToken.BeginArray -> {
-        key = null
-        expectingValue = false
-      }
-
       JsonToken.Colon -> expectingValue = true
-
-      is JsonToken.Boolean -> {
-        key = null
-        expectingValue = false
-      }
-
-      is JsonToken.Null -> {
-        key = null
-        expectingValue = false
-      }
-
-      is JsonToken.Number -> {
-        key = null
-        expectingValue = false
-      }
 
       is JsonToken.String -> when {
         expectingValue -> {
@@ -141,6 +116,20 @@ internal fun String.extractPublicKeyFromJson(): String? {
 
         else -> key = token.content
       }
+
+      is JsonToken.Boolean,
+      is JsonToken.Null,
+      is JsonToken.Number,
+      JsonToken.BeginObject,
+      JsonToken.BeginArray,
+      JsonToken.Comma,
+      JsonToken.EndArray,
+      JsonToken.EndObject -> {
+        key = null
+        expectingValue = false
+      }
+
+      is JsonToken.Whitespace -> {}
 
       is JsonToken.EOF -> return null
     }

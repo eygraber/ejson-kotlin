@@ -1,5 +1,4 @@
 import com.eygraber.gradle.detekt.configureDetekt
-import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.accessors.dm.LibrariesForLibs
 
 val libs = the<LibrariesForLibs>()
@@ -12,7 +11,6 @@ configureDetekt(
   jdkVersion = libs.versions.jdk
 )
 
-@Suppress("UnstableApiUsage")
 dependencies {
   detektPlugins(libs.detekt)
   detektPlugins(libs.detektEygraber.formatting)

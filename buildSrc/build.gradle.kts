@@ -1,27 +1,21 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.eygraber.gradle.detekt.configureDetekt
+import com.eygraber.gradle.kotlin.configureKgp
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   `kotlin-dsl`
+  alias(libs.plugins.detekt)
+  alias(libs.plugins.gradleUtils)
 }
 
-tasks.withType<JavaCompile> {
-  sourceCompatibility = libs.versions.jdk.get()
-  targetCompatibility = libs.versions.jdk.get()
-}
+configureKgp(
+  jdkVersion = libs.versions.jdk
+)
 
-kotlin {
-  jvmToolchain {
-    require(this is JavaToolchainSpec)
-    languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get()))
-    vendor.set(JvmVendorSpec.AZUL)
-  }
-}
-
-tasks.withType<KotlinCompile>().configureEach {
-  kotlinOptions {
-    jvmTarget = libs.versions.jdk.get()
-  }
-}
+configureDetekt(
+  jdkVersion = libs.versions.jdk,
+  configFile = project.file("${project.rootDir.parentFile}/detekt.yml")
+)
 
 repositories {
   mavenCentral()
@@ -37,4 +31,10 @@ dependencies {
 
   implementation(libs.buildscript.utils.kotlin)
   implementation(libs.buildscript.utils.detekt)
+
+  dependencies {
+    detektPlugins(libs.detekt)
+    detektPlugins(libs.detektEygraber.formatting)
+    detektPlugins(libs.detektEygraber.style)
+  }
 }

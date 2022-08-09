@@ -2,8 +2,12 @@ package com.eygraber.ejson
 
 import com.google.common.jimfs.Configuration
 import org.junit.jupiter.api.Test
-import org.junitpioneer.jupiter.SetEnvironmentVariable
+import org.junit.jupiter.api.extension.ExtendWith
+import uk.org.webcompere.systemstubs.environment.EnvironmentVariables
+import uk.org.webcompere.systemstubs.jupiter.SystemStub
+import uk.org.webcompere.systemstubs.jupiter.SystemStubsExtension
 
+@ExtendWith(SystemStubsExtension::class)
 class KeyDirTests {
   @Test
   fun `when there is no keydir an error is thrown`() = usingFileSystem { fs ->
@@ -49,8 +53,11 @@ class KeyDirTests {
     }
   }
 
+  @SystemStub
+  @Suppress("unused")
+  private val envVars = EnvironmentVariables("EJSON_KEYDIR", "/tmp/ejsonKeyDir")
+
   @Test
-  @SetEnvironmentVariable(key = "EJSON_KEYDIR", value = "/tmp/ejsonKeyDir")
   fun `when the envvar keydir is used no error is thrown`() = usingFileSystem(Configuration.unix()) { fs ->
     fs.withEnvVarKeyDir { kp, ejson ->
       val encrypted = ejson.assertEncryptSucceededJson(

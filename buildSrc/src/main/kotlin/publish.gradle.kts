@@ -5,6 +5,9 @@ plugins {
   id("com.vanniktech.maven.publish")
 }
 
-mavenPublish {
-  sonatypeHost = SonatypeHost.S01
+@Suppress("UnstableApiUsage")
+mavenPublishing {
+  publishToMavenCentral(SonatypeHost.S01)
+
+  signAllPublications()
 }

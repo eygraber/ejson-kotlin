@@ -42,4 +42,4 @@ test-jimfs = "com.google.jimfs:jimfs:1.2"
 test-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 test-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 test-junit-extensions = "uk.org.webcompere:system-stubs-jupiter:2.0.1"
-test-junit-pioneer = "org.junit-pioneer:junit-pioneer:1.9.0"
+test-junit-pioneer = "org.junit-pioneer:junit-pioneer:1.9.1"

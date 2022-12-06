@@ -10,7 +10,7 @@ jdk = "17"
 
 junit = "5.9.1"
 
-kotlin = "1.7.21"
+kotlin = "1.7.22"
 
 publish = "0.22.0"
 

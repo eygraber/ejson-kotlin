@@ -8,7 +8,7 @@ gradleUtils = "0.0.23"
 
 jdk = "17"
 
-junit = "5.9.1"
+junit = "5.9.2"
 
 kotlin = "1.8.0"
 

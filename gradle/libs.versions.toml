@@ -31,7 +31,7 @@ kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1
 
 tweetnacl = "org.purejava:tweetnacl-java:1.1.2"
 
-test-assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
+test-assertk = "com.willowtreeapps.assertk:assertk-jvm:0.26"
 test-jimfs = "com.google.jimfs:jimfs:1.2"
 test-junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 test-junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }

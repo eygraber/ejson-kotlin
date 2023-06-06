@@ -1,5 +1,5 @@
 [versions]
-detekt = "1.22.0"
+detekt = "1.23.0"
 detektEygraber = "1.0.11"
 
 dokka = "1.8.20"
@@ -12,6 +12,8 @@ junit = "5.9.3"
 
 kotlin = "1.8.21"
 
+ktlint = "0.49.1"
+
 publish = "0.25.2"
 
 [plugins]
@@ -23,11 +25,13 @@ buildscript-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", versio
 buildscript-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 buildscript-publish = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "publish" }
 
-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detektEygraber-formatting = { module = "com.eygraber.detekt.rules:formatting", version.ref = "detektEygraber" }
 detektEygraber-style = { module = "com.eygraber.detekt.rules:style", version.ref = "detektEygraber" }
 
 kotlinx-serialization-json = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
+
+# not actually used; just here so renovate picks it up
+ktlint = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
 tweetnacl = "org.purejava:tweetnacl-java:1.1.2"
 

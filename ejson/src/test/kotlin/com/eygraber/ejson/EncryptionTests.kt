@@ -52,7 +52,7 @@ class EncryptionTests {
 
   private companion object {
     const val BOXED_SECRET_KEY = "secret"
-    @Suppress("MaxLineLength")
+    @Suppress("ktlint:standard:max-line-length")
     const val BOXED_SECRET = "EJ[1:fjVmA40ot9E0WTIejpeBvMwD3x8oyIo33NOGq0VSslo=:7Acfyhjym4oeZIstXa2EvE1HbSPWP1f9:1SDE4XkfNLRwcZzPLkX9/2YNwJfw3tP1Di1sVDQMYZx9oLm7Ds5v40dJh5Ji]"
     val BOXED_PAIR = BOXED_SECRET_KEY to BOXED_SECRET
 

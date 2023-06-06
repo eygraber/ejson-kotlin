@@ -12,7 +12,9 @@ internal fun ByteArray.encodeHex() = TweetNaclFast.hexEncodeToString(this).lower
 
 // borrowed from https://github.com/NeilMadden/salty-coffee/blob/4b51a3b080df204fd191bdaf7cc2633bb4b8cd43/src/main/java/software/pando/crypto/nacl/Bytes.java#L92
 private val PreferredPngs = arrayOf(
-  "NativePRNGNonBlocking", "NativePRNG", "DRBG"
+  "NativePRNGNonBlocking",
+  "NativePRNG",
+  "DRBG"
 )
 
 internal fun getSecureRandomInstance(): SecureRandom {

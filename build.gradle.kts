@@ -7,6 +7,7 @@ buildscript {
     classpath(libs.buildscript.dokka)
     classpath(libs.buildscript.kotlin)
     classpath(libs.buildscript.publish)
+
   }
 }
 

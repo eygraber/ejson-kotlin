@@ -10,7 +10,7 @@ jdk = "17"
 
 junit = "5.9.3"
 
-kotlin = "1.8.21"
+kotlin = "1.8.22"
 
 ktlint = "0.49.1"
 

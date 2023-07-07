@@ -1,6 +1,8 @@
 package com.eygraber.ejson
 
 import com.iwebpp.crypto.TweetNaclFast
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.random.Random
 
 internal class Encrypter internal constructor(
@@ -25,8 +27,7 @@ internal class Encrypter internal constructor(
       return field
     }
 
-  private val encoder = Base64()
-
+  @OptIn(ExperimentalEncodingApi::class)
   fun encrypt(message: String): String {
     if(message.matches(boxRegex)) return message
 
@@ -34,9 +35,9 @@ internal class Encrypter internal constructor(
     val nonce = secureRandom.generateSeed(24)
     val cipher = sbox.box(message.encodeToByteArray(), nonce)
 
-    val publicKey64 = encoder.encode(kp.publicKey).decodeToString()
-    val nonce64 = encoder.encode(nonce).decodeToString()
-    val cipher64 = encoder.encode(cipher).decodeToString()
+    val publicKey64 = Base64.Default.encode(kp.publicKey)
+    val nonce64 = Base64.Default.encode(nonce)
+    val cipher64 = Base64.Default.encode(cipher)
 
     return "EJ[1:$publicKey64:$nonce64:$cipher64]"
   }

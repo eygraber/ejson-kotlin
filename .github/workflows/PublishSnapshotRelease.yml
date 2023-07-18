@@ -22,6 +22,7 @@ jobs:
         uses: gradle/gradle-build-action@v2.6.1
         with:
           gradle-version: wrapper
+          dependency-graph: generate-and-submit
 
       - name: Publish the artifacts
         env:
@@ -32,3 +33,4 @@ jobs:
 
 env:
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dkotlin.incremental=false -Dorg.gradle.jvmargs="-Xmx4g -Xms512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8 -XX:MaxMetaspaceSize=1024m"
+  DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: runtimeClasspath

@@ -8,7 +8,7 @@ conventions = "0.0.39"
 
 jdk = "17"
 
-junit = "5.9.3"
+junit = "5.10.0"
 
 kotlin = "1.9.0"
 

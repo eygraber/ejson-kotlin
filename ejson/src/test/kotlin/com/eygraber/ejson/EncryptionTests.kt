@@ -20,7 +20,7 @@ class EncryptionTests {
     fs.withDefaultKeyDir { kp, ejson ->
       val input = kp.createValidSecretsJson(
         "_comment_one" to "This is a comment",
-        "_comment_two" to "This is also a comment"
+        "_comment_two" to "This is also a comment",
       )
 
       assertThat(ejson.assertEncryptSucceeded(input).json).isEqualTo(input)
@@ -32,8 +32,8 @@ class EncryptionTests {
     fs.withDefaultKeyDir { kp, ejson ->
       assertThat(
         ejson.assertEncryptSucceededJson(
-          kp.createValidSecretsJson(BOXED_PAIR)
-        ).string(BOXED_SECRET_KEY)
+          kp.createValidSecretsJson(BOXED_PAIR),
+        ).string(BOXED_SECRET_KEY),
       ).isEqualTo(BOXED_SECRET)
     }
   }
@@ -42,7 +42,7 @@ class EncryptionTests {
   fun `encrypting input ignores boxed secrets and encrypts unboxed secrets`() = usingFileSystem { fs ->
     fs.withDefaultKeyDir { kp, ejson ->
       val encrypted = ejson.assertEncryptSucceededJson(
-        kp.createValidSecretsJson(BOXED_PAIR, UNBOXED_PAIR)
+        kp.createValidSecretsJson(BOXED_PAIR, UNBOXED_PAIR),
       )
 
       assertThat(encrypted.string(BOXED_SECRET_KEY)).isEqualTo(BOXED_SECRET)

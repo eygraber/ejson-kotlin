@@ -8,11 +8,11 @@ import kotlin.io.path.readText
 
 public class Ejson(
   overrideKeyDir: Path? = null,
-  filesystem: FileSystem = FileSystems.getDefault()
+  filesystem: FileSystem = FileSystems.getDefault(),
 ) {
   private val keyDirProvider = KeyDirProvider(
     filesystem,
-    overrideKeyDir
+    overrideKeyDir,
   )
 
   public fun encrypt(secretsJsonString: String): Result {

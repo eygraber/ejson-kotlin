@@ -10,13 +10,13 @@ class InputTests {
     val ejson = Ejson()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: an error occurred while parsing json - expected a JsonObject but received EOF"
+      "Encryption failed: an error occurred while parsing json - expected a JsonObject but received EOF",
     ) {
       ejson.encrypt("")
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: an error occurred while parsing json - expected a JsonObject but received EOF"
+      "Decryption failed: an error occurred while parsing json - expected a JsonObject but received EOF",
     ) {
       ejson.decrypt("")
     }
@@ -27,13 +27,13 @@ class InputTests {
     val ejson = Ejson()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: an error occurred while parsing json - expected a JsonObject but received String"
+      "Encryption failed: an error occurred while parsing json - expected a JsonObject but received String",
     ) {
       ejson.encrypt("\"test\": \"true\"")
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: an error occurred while parsing json - expected a JsonObject but received String"
+      "Decryption failed: an error occurred while parsing json - expected a JsonObject but received String",
     ) {
       ejson.decrypt("\"test\": \"true\"")
     }
@@ -44,13 +44,13 @@ class InputTests {
     val ejson = Ejson()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: an error occurred while parsing json - expected a JsonObject but received BeginArray"
+      "Encryption failed: an error occurred while parsing json - expected a JsonObject but received BeginArray",
     ) {
       ejson.encrypt("[]")
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: an error occurred while parsing json - expected a JsonObject but received BeginArray"
+      "Decryption failed: an error occurred while parsing json - expected a JsonObject but received BeginArray",
     ) {
       ejson.decrypt("[]")
     }
@@ -61,13 +61,13 @@ class InputTests {
     val ejson = Ejson()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: public key string not present in EJSON file"
+      "Encryption failed: public key string not present in EJSON file",
     ) {
       ejson.encrypt("{}")
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: public key string not present in EJSON file"
+      "Decryption failed: public key string not present in EJSON file",
     ) {
       ejson.decrypt("{}")
     }
@@ -84,13 +84,13 @@ class InputTests {
     """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: public key string not present in EJSON file"
+      "Encryption failed: public key string not present in EJSON file",
     ) {
       ejson.encrypt(input)
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: public key string not present in EJSON file"
+      "Decryption failed: public key string not present in EJSON file",
     ) {
       ejson.decrypt(input)
     }
@@ -107,13 +107,13 @@ class InputTests {
     """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: public key has invalid format (length=7)"
+      "Encryption failed: public key has invalid format (length=7)",
     ) {
       ejson.encrypt(input)
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: public key has invalid format (length=7)"
+      "Decryption failed: public key has invalid format (length=7)",
     ) {
       ejson.decrypt(input)
     }
@@ -127,13 +127,13 @@ class InputTests {
     val ejson = Ejson()
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Encryption failed: An error occurred while reading $inputPath - ${input.name}"
+      "Encryption failed: An error occurred while reading $inputPath - ${input.name}",
     ) {
       ejson.encrypt(input)
     }
 
     assertThrowsWithMessage<IllegalStateException>(
-      "Decryption failed: An error occurred while reading $inputPath - ${input.name}"
+      "Decryption failed: An error occurred while reading $inputPath - ${input.name}",
     ) {
       ejson.decrypt(input)
     }

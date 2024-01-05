@@ -1,7 +1,7 @@
 package com.eygraber.ejson.json
 
 internal class JsonTokenizer(
-  private val json: String
+  private val json: String,
 ) {
   private var index = 0
 

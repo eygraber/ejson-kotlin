@@ -6,7 +6,7 @@ import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.random.Random
 
 internal class Encrypter internal constructor(
-  publicKey: PublicKey
+  publicKey: PublicKey,
 ) {
   private val kp = TweetNaclFast.Box.keyPair()
 

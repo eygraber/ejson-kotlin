@@ -18,26 +18,26 @@ import kotlin.io.path.writeText
 
 internal inline fun <reified T : Throwable> assertThrowsWithMessage(
   message: String,
-  noinline action: () -> Unit
+  noinline action: () -> Unit,
 ) {
   assertThat(assertThrows<T>(action).message).isEqualTo(message)
 }
 
 internal inline fun usingFileSystem(
   fsConfig: Configuration = Configuration.forCurrentPlatform(),
-  block: (FileSystem) -> Unit
+  block: (FileSystem) -> Unit,
 ) {
   Jimfs.newFileSystem(fsConfig).use(block)
 }
 
 internal inline fun FileSystem.withDefaultKeyDir(
-  block: (EjsonKeyPair, Ejson) -> Unit
+  block: (EjsonKeyPair, Ejson) -> Unit,
 ) {
   val kp = EjsonKeyPair.generate()
 
   val keyDir = rootDirectories.first().resolve(getPath("opt", "ejson", "keys")).createDirectories()
   keyDir.resolve(getPath(kp.publicKey.toHexString())).createFile().writeText(
-    kp.secretKey.toHexString()
+    kp.secretKey.toHexString(),
   )
 
   val ejson = Ejson(filesystem = this)
@@ -46,7 +46,7 @@ internal inline fun FileSystem.withDefaultKeyDir(
 }
 
 internal inline fun FileSystem.withEnvVarKeyDir(
-  block: (EjsonKeyPair, Ejson) -> Unit
+  block: (EjsonKeyPair, Ejson) -> Unit,
 ) {
   val kp = EjsonKeyPair.generate()
 
@@ -56,7 +56,7 @@ internal inline fun FileSystem.withEnvVarKeyDir(
 
   val keyDir = getPath(envvar).createDirectories()
   keyDir.resolve(getPath(kp.publicKey.toHexString())).createFile().writeText(
-    kp.secretKey.toHexString()
+    kp.secretKey.toHexString(),
   )
 
   val ejson = Ejson(filesystem = this)
@@ -66,13 +66,13 @@ internal inline fun FileSystem.withEnvVarKeyDir(
 
 internal inline fun FileSystem.withOverrideKeyDir(
   path: String,
-  block: (EjsonKeyPair, Ejson) -> Unit
+  block: (EjsonKeyPair, Ejson) -> Unit,
 ) {
   val kp = EjsonKeyPair.generate()
 
   val keyDir = rootDirectories.first().resolve(getPath(path)).createDirectories()
   keyDir.resolve(getPath(kp.publicKey.toHexString())).createFile().writeText(
-    kp.secretKey.toHexString()
+    kp.secretKey.toHexString(),
   )
 
   val ejson = Ejson(overrideKeyDir = keyDir, filesystem = this)
@@ -117,7 +117,7 @@ internal fun Ejson.Result.assertFailed(): Ejson.Result.Error {
 
 internal fun EjsonKeyPair.createValidSecretsJson(
   keyValue: Pair<String, String>,
-  vararg keyValues: Pair<String, String>
+  vararg keyValues: Pair<String, String>,
 ) =
   """
   |{

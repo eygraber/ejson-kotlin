@@ -4,7 +4,7 @@ import com.iwebpp.crypto.TweetNaclFast
 
 public class EjsonKeyPair(
   public val secretKey: PrivateKey,
-  public val publicKey: PublicKey
+  public val publicKey: PublicKey,
 ) {
   public companion object {
     public fun generate(): EjsonKeyPair =

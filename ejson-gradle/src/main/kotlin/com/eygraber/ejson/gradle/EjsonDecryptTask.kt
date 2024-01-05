@@ -52,7 +52,7 @@ public abstract class EjsonDecryptTask : DefaultTask() {
     val outputText = Ejson().decryptSecrets(
       secretsFile = secretsFile.get().asFile.toPath(),
       userSuppliedPrivateKey = userSuppliedPrivateKey.orNull,
-      transform = transformOutput
+      transform = transformOutput,
     )
 
     val outputDir = output.get().asFile.apply {

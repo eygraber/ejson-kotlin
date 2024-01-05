@@ -124,7 +124,8 @@ internal fun String.extractPublicKeyFromJson(): String? {
       JsonToken.BeginArray,
       JsonToken.Comma,
       JsonToken.EndArray,
-      JsonToken.EndObject -> {
+      JsonToken.EndObject,
+      -> {
         key = null
         expectingValue = false
       }

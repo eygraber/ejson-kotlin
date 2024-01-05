@@ -14,7 +14,7 @@ internal fun ByteArray.encodeHex() = TweetNaclFast.hexEncodeToString(this).lower
 private val PreferredPngs = arrayOf(
   "NativePRNGNonBlocking",
   "NativePRNG",
-  "DRBG"
+  "DRBG",
 )
 
 internal fun getSecureRandomInstance(): SecureRandom {

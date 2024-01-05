@@ -5,7 +5,7 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 internal class Decrypter internal constructor(
-  private val privateKey: PrivateKey
+  private val privateKey: PrivateKey,
 ) {
   @OptIn(ExperimentalEncodingApi::class)
   fun decrypt(message: String): String {
@@ -15,7 +15,7 @@ internal class Decrypter internal constructor(
       boxRegex
         .findAll(message)
         .firstOrNull()
-        ?.groupValues
+        ?.groupValues,
     ) {
       error
     }

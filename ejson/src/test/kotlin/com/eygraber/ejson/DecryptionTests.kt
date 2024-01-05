@@ -19,7 +19,7 @@ class DecryptionTests {
     fs.withDefaultKeyDir { kp, ejson ->
       val input = kp.createValidSecretsJson(
         "_comment_one" to "This is a comment",
-        "_comment_two" to "This is also a comment"
+        "_comment_two" to "This is also a comment",
       )
 
       assertThat(ejson.assertDecryptSucceeded(input).json).isEqualTo(input)
@@ -31,8 +31,8 @@ class DecryptionTests {
     fs.withDefaultKeyDir { kp, ejson ->
       assertThat(
         ejson.assertDecryptFailed(
-          kp.createValidSecretsJson(UNBOXED_PAIR)
-        ).error
+          kp.createValidSecretsJson(UNBOXED_PAIR),
+        ).error,
       ).isEqualTo("Decryption failed: invalid message format")
     }
   }
@@ -42,11 +42,11 @@ class DecryptionTests {
     fs.withDefaultKeyDir { kp, ejson ->
       val input = kp.createValidSecretsJson(UNBOXED_PAIR)
       val encrypted = ejson.assertEncryptSucceeded(
-        input
+        input,
       ).json
 
       assertThat(
-        ejson.assertDecryptSucceeded(encrypted).json
+        ejson.assertDecryptSucceeded(encrypted).json,
       ).isEqualTo(input)
     }
   }
@@ -58,13 +58,13 @@ class DecryptionTests {
 
     val input = kp.createValidSecretsJson(UNBOXED_PAIR)
     val encrypted = ejson.assertEncryptSucceeded(
-      input
+      input,
     ).json
 
     val privateKey = kp.secretKey.toHexString()
 
     assertThat(
-      ejson.assertDecryptSucceeded(encrypted, userSuppliedPrivateKey = privateKey).json
+      ejson.assertDecryptSucceeded(encrypted, userSuppliedPrivateKey = privateKey).json,
     ).isEqualTo(input)
   }
 

@@ -8,17 +8,17 @@ import kotlinx.serialization.json.jsonObject
 public inline fun Ejson.decryptSecrets(
   secretsFile: java.nio.file.Path,
   userSuppliedPrivateKey: String? = null,
-  transform: (JsonObject) -> String = { it.toString() }
+  transform: (JsonObject) -> String = { it.toString() },
 ): String = when(
   val result = decrypt(
     ejsonSecretsFile = secretsFile,
-    userSuppliedPrivateKey = userSuppliedPrivateKey
+    userSuppliedPrivateKey = userSuppliedPrivateKey,
   )
 ) {
   is Ejson.Result.Success -> transform(
     Json
       .parseToJsonElement(result.json)
-      .jsonObject
+      .jsonObject,
   )
 
   is Ejson.Result.Error -> error(result.error)

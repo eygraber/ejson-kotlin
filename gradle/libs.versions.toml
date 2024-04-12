@@ -4,7 +4,7 @@ detektEygraber = "1.0.11"
 
 dokka = "1.9.20"
 
-conventions = "0.0.70"
+conventions = "0.0.71"
 
 junit = "5.10.2"
 

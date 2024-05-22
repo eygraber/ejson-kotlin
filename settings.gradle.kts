@@ -11,12 +11,6 @@ pluginManagement {
       }
     }
 
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev") {
-      content {
-        includeGroupByRegex("org\\.jetbrains.*")
-      }
-    }
-
     mavenCentral()
 
     maven("https://oss.sonatype.org/content/repositories/snapshots") {
@@ -37,16 +31,13 @@ pluginManagement {
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
-  // comment this out for now because it doesn't work with KMP js
-  // https://youtrack.jetbrains.com/issue/KT-51379/
-  // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 
   repositories {
     addCommonRepositories(
       includeMavenCentral = true,
       includeMavenCentralSnapshots = true,
       includeGoogle = true,
-      includeJetbrainsCompose = true,
     )
   }
 }

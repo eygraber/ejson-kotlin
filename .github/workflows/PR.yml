@@ -18,8 +18,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run tests
         run: ./gradlew test
@@ -44,8 +42,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: wrapper
-          gradle-home-cache-cleanup: true
-          validate-wrappers: true
 
       - name: Run detekt
         run: ./gradlew detektMain

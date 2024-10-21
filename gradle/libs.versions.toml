@@ -6,7 +6,7 @@ dokka = "1.9.20"
 
 conventions = "0.0.78"
 
-junit = "5.11.2"
+junit = "5.11.3"
 
 kotlin = "2.0.21"
 

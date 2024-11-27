@@ -8,7 +8,7 @@ conventions = "0.0.79"
 
 junit = "5.11.3"
 
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 
 ktlint = "1.4.1"
 

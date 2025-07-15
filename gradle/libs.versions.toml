@@ -10,7 +10,7 @@ junit = "5.13.3"
 
 kotlin = "2.2.0"
 
-ktlint = "1.6.0"
+ktlint = "1.7.0"
 
 publish = "0.34.0"
 

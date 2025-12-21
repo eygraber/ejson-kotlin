@@ -9,6 +9,10 @@ import uk.org.webcompere.systemstubs.jupiter.SystemStubsExtension
 
 @ExtendWith(SystemStubsExtension::class)
 class KeyDirTests {
+  @SystemStub
+  @Suppress("unused")
+  private val envVars = EnvironmentVariables("EJSON_KEYDIR", "/tmp/ejsonKeyDir")
+
   @Test
   fun `when there is no keydir an error is thrown`() = usingFileSystem { fs ->
     val ejson = Ejson(filesystem = fs)
@@ -18,7 +22,7 @@ class KeyDirTests {
     ) {
       ejson.decrypt(
         """
-      |{"_public_key": "$PUBLIC_KEY"}
+        |{"_public_key": "$PUBLIC_KEY"}
         """.trimMargin(),
       )
     }
@@ -36,7 +40,7 @@ class KeyDirTests {
     ) {
       ejson.decrypt(
         """
-      |{"_public_key": "$PUBLIC_KEY"}
+        |{"_public_key": "$PUBLIC_KEY"}
         """.trimMargin(),
       )
     }
@@ -52,10 +56,6 @@ class KeyDirTests {
       ejson.assertDecryptSucceededJson(encrypted.toString())
     }
   }
-
-  @SystemStub
-  @Suppress("unused")
-  private val envVars = EnvironmentVariables("EJSON_KEYDIR", "/tmp/ejsonKeyDir")
 
   @Test
   fun `when the envvar keydir is used no error is thrown`() = usingFileSystem(Configuration.unix()) { fs ->

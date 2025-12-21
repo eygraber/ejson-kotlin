@@ -35,7 +35,14 @@ public class Ejson(
       ejsonSecretsFile.readText()
     }
     catch(t: Throwable) {
-      error("Encryption failed: An error occurred while reading ${ejsonSecretsFile.pathString} - ${t.message}")
+      error(
+        buildString {
+          append("Encryption failed: An error occurred while reading ${ejsonSecretsFile.pathString}")
+          t.message?.let { message ->
+            append(" - $message")
+          }
+        },
+      )
     }
 
     return encrypt(secretsJsonString)
@@ -58,7 +65,14 @@ public class Ejson(
         keyDir.resolve(jsonPublicKeyEncoded).readText().trim()
       }
       catch(t: Throwable) {
-        error("Decryption failed: couldn't read key file $jsonPublicKeyEncoded (${t.message})")
+        error(
+          buildString {
+            append("Decryption failed: couldn't read key file $jsonPublicKeyEncoded")
+            t.message?.let { message ->
+              append(" ($message)")
+            }
+          },
+        )
       }
     }
 
@@ -77,7 +91,14 @@ public class Ejson(
       ejsonSecretsFile.readText()
     }
     catch(t: Throwable) {
-      error("Decryption failed: An error occurred while reading ${ejsonSecretsFile.pathString} - ${t.message}")
+      error(
+        buildString {
+          append("Decryption failed: An error occurred while reading ${ejsonSecretsFile.pathString}")
+          t.message?.let { message ->
+            append(" - $message")
+          }
+        },
+      )
     }
 
     return decrypt(secretsJsonString, userSuppliedPrivateKey)
@@ -94,7 +115,15 @@ public class Ejson(
       extractPublicKeyFromJson()
     }
     catch(t: Throwable) {
-      return PublicKeyResult.Error("an error occurred while parsing json - ${t.message}")
+      return PublicKeyResult.Error(
+        buildString {
+          append("an error occurred while parsing json")
+
+          t.message?.let { message ->
+            append(" - $message")
+          }
+        },
+      )
     }
 
     return when(publicKey) {

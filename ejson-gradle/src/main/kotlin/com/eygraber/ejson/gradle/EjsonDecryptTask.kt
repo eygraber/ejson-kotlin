@@ -44,7 +44,7 @@ public abstract class EjsonDecryptTask : DefaultTask() {
       outputKey.orNull?.let { key ->
         when(val field = json[key]) {
           is JsonPrimitive -> requireNotNull(field.contentOrNull)
-          else -> field.toString()
+          else -> field?.toString() ?: "null"
         }
       } ?: json.toString()
     }

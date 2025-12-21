@@ -7,7 +7,7 @@ internal fun String.walkJsonAndTransformStrings(transform: (String) -> String): 
   val tokenizer = JsonTokenizer(this)
   val builder = StringBuilder(length)
 
-  var expectingValue = false
+  var isExpectingValue = false
   var key: CharSequence? = null
 
   while(true) {
@@ -15,7 +15,7 @@ internal fun String.walkJsonAndTransformStrings(transform: (String) -> String): 
       JsonToken.BeginObject -> {
         builder.append("{")
         key = null
-        expectingValue = false
+        isExpectingValue = false
       }
 
       JsonToken.EndObject -> builder.append("}")
@@ -23,14 +23,14 @@ internal fun String.walkJsonAndTransformStrings(transform: (String) -> String): 
       JsonToken.BeginArray -> {
         builder.append("[")
         key = null
-        expectingValue = false
+        isExpectingValue = false
       }
 
       JsonToken.EndArray -> builder.append("]")
 
       JsonToken.Colon -> {
         builder.append(":")
-        expectingValue = true
+        isExpectingValue = true
       }
 
       JsonToken.Comma -> builder.append(",")
@@ -38,23 +38,23 @@ internal fun String.walkJsonAndTransformStrings(transform: (String) -> String): 
       is JsonToken.Boolean -> {
         builder.append(token.content)
         key = null
-        expectingValue = false
+        isExpectingValue = false
       }
 
       is JsonToken.Null -> {
         builder.append(token.content)
         key = null
-        expectingValue = false
+        isExpectingValue = false
       }
 
       is JsonToken.Number -> {
         builder.append(token.content)
         key = null
-        expectingValue = false
+        isExpectingValue = false
       }
 
       is JsonToken.String -> when {
-        expectingValue -> {
+        isExpectingValue -> {
           requireNotNull(key)
           if(key.length >= 2 && key[1] == '_') {
             builder.append(token.content)
@@ -65,7 +65,7 @@ internal fun String.walkJsonAndTransformStrings(transform: (String) -> String): 
           }
 
           key = null
-          expectingValue = false
+          isExpectingValue = false
         }
 
         else -> {
@@ -98,20 +98,20 @@ internal fun String.extractPublicKeyFromJson(): String? {
     error("expected a JsonObject but received $firstToken")
   }
 
-  var expectingValue = false
+  var isExpectingValue = false
   var key: CharSequence? = null
 
   while(true) {
     when(val token = tokenizer.nextToken()) {
-      JsonToken.Colon -> expectingValue = true
+      JsonToken.Colon -> isExpectingValue = true
 
       is JsonToken.String -> when {
-        expectingValue -> {
+        isExpectingValue -> {
           requireNotNull(key)
           if(key == "\"_public_key\"") return token.content.substring(1 until token.content.lastIndex)
 
           key = null
-          expectingValue = false
+          isExpectingValue = false
         }
 
         else -> key = token.content
@@ -127,7 +127,7 @@ internal fun String.extractPublicKeyFromJson(): String? {
       JsonToken.EndObject,
       -> {
         key = null
-        expectingValue = false
+        isExpectingValue = false
       }
 
       is JsonToken.Whitespace -> {}

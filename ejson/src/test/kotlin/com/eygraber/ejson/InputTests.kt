@@ -78,9 +78,9 @@ class InputTests {
     val ejson = Ejson()
 
     val input = """
-                |{
-                |  "public_key": "test"
-                |}
+    |{
+    |  "public_key": "test"
+    |}
     """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(
@@ -101,9 +101,9 @@ class InputTests {
     val ejson = Ejson()
 
     val input = """
-                |{
-                |  "_public_key": "invalid"
-                |}
+    |{
+    |  "_public_key": "invalid"
+    |}
     """.trimMargin()
 
     assertThrowsWithMessage<IllegalStateException>(

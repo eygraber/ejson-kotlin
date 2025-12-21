@@ -5,6 +5,8 @@ internal class JsonTokenizer(
 ) {
   private var index = 0
 
+  private val Char.isJsonDigit get() = this in numbers || this == '.'
+
   @Suppress("NOTHING_TO_INLINE")
   inline fun nextToken(): JsonToken {
     json.trimStart()
@@ -45,10 +47,10 @@ internal class JsonTokenizer(
 
   private fun expect(size: Int, expected: CharSequence, token: (CharSequence) -> JsonToken) =
     if(index + size - 1 < json.lastIndex) {
-      JsonToken.EOF(json.subSequence(index, json.length))
+      JsonToken.EOF(json.subSequence(startIndex = index, endIndex = json.length))
     }
     else {
-      val actual = json.subSequence(index, index + size)
+      val actual = json.subSequence(startIndex = index, endIndex = index + size)
       require(actual == expected) {
         "Was expecting $expected; found $actual"
       }
@@ -64,8 +66,6 @@ internal class JsonTokenizer(
 
     return JsonToken.String(json.substring(startingIndex..index))
   }
-
-  private val Char.isJsonDigit get() = this in numbers || this == '.'
 
   companion object {
     val whitespaceChars = charArrayOf(' ', '\r', '\n', '\t')

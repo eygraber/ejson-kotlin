@@ -33,7 +33,8 @@ internal fun getSecureRandomInstance(): SecureRandom {
     // weak SHA1PRNG and go straight to this high-quality seed generator.
     try {
       return SecureRandom.getInstance("SHA1PRNG")
-    } catch(e: NoSuchAlgorithmException) {
+    }
+    catch(e: NoSuchAlgorithmException) {
       // Skip this one
     }
   }

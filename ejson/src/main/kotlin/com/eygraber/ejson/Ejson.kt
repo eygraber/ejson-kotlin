@@ -104,10 +104,10 @@ public class Ejson(
     return decrypt(secretsJsonString, userSuppliedPrivateKey)
   }
 
-  public sealed class Result {
-    public data class Error(val error: String) : Result()
+  public sealed interface Result {
+    public data class Error(val error: String) : Result
 
-    public data class Success(val json: String) : Result()
+    public data class Success(val json: String) : Result
   }
 
   private fun String.extractPublicKey(): PublicKeyResult {
@@ -137,8 +137,8 @@ public class Ejson(
   }
 }
 
-private sealed class PublicKeyResult {
-  data class Error(val error: String) : PublicKeyResult()
+private sealed interface PublicKeyResult {
+  data class Error(val error: String) : PublicKeyResult
 
-  data class Success(val key: PublicKey) : PublicKeyResult()
+  data class Success(val key: PublicKey) : PublicKeyResult
 }

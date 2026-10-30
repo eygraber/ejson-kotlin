@@ -1,6 +1,6 @@
 package com.eygraber.ejson
 
-import com.iwebpp.crypto.TweetNaclFast
+import software.pando.crypto.nacl.CryptoBox
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
@@ -39,7 +39,9 @@ internal class Decrypter internal constructor(
 
     val cipher = Base64.Default.decode(cipher64)
 
-    val cbox = TweetNaclFast.Box(publicKey.key, privateKey.key)
-    return cbox.open(cipher, nonce).decodeToString()
+    return CryptoBox
+      .fromCombined(nonce, cipher)
+      .decrypt(CryptoBox.privateKey(privateKey.key), CryptoBox.publicKey(publicKey.key))
+      .decodeToString()
   }
 }

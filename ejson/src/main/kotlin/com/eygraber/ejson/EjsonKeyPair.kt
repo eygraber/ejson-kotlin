@@ -1,6 +1,6 @@
 package com.eygraber.ejson
 
-import com.iwebpp.crypto.TweetNaclFast
+import software.pando.crypto.nacl.CryptoBox
 
 public class EjsonKeyPair(
   public val secretKey: PrivateKey,
@@ -8,8 +8,8 @@ public class EjsonKeyPair(
 ) {
   public companion object {
     public fun generate(): EjsonKeyPair =
-      TweetNaclFast.Box.keyPair().let { kp ->
-        EjsonKeyPair(PrivateKey(kp.secretKey), PublicKey(kp.publicKey))
+      CryptoBox.keyPair().let { kp ->
+        EjsonKeyPair(PrivateKey(kp.private.toRawBytes()), PublicKey(kp.public.toRawBytes()))
       }
   }
 }

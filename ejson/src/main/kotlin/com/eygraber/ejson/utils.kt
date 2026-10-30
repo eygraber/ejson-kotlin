@@ -1,14 +1,28 @@
 package com.eygraber.ejson
 
-import com.iwebpp.crypto.TweetNaclFast
+import java.math.BigInteger
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
+import java.security.interfaces.XECPrivateKey
+import java.security.interfaces.XECPublicKey
 import java.util.Locale
 
 internal val boxRegex = Regex("\\AEJ\\[(\\d):([A-Za-z0-9+=/]{44}):([A-Za-z0-9+=/]{32}):(.+)]\\z")
 
-internal fun String.decodeHex() = TweetNaclFast.hexDecode(this)
-internal fun ByteArray.encodeHex() = TweetNaclFast.hexEncodeToString(this).lowercase(Locale.US)
+internal fun String.decodeHex() = hexToByteArray()
+internal fun ByteArray.encodeHex() = toHexString()
+
+internal fun java.security.PrivateKey.toRawBytes(): ByteArray = (this as XECPrivateKey).scalar.get()
+
+internal fun java.security.PublicKey.toRawBytes(): ByteArray = (this as XECPublicKey).u.toLittleEndian(size = 32)
+
+private fun BigInteger.toLittleEndian(size: Int): ByteArray {
+  val bigEndian = toByteArray()
+  return ByteArray(size) { i ->
+    val index = bigEndian.size - 1 - i
+    if(index >= 0) bigEndian[index] else 0
+  }
+}
 
 // borrowed from https://github.com/NeilMadden/salty-coffee/blob/4b51a3b080df204fd191bdaf7cc2633bb4b8cd43/src/main/java/software/pando/crypto/nacl/Bytes.java#L92
 private val PreferredPngs = arrayOf(

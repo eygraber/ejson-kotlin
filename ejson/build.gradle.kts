@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-  implementation(libs.tweetnacl)
+  implementation(libs.saltyCoffee)
 
   testRuntimeOnly(libs.test.junit.engine)
   testImplementation(libs.test.junit.api)
